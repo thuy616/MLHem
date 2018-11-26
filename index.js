@@ -4,7 +4,7 @@ const loadCSV = require('./src/load-csv')
 const knn = require('./src/knn-tf')
 
 let { features, labels, testFeatures, testLabels } = loadCSV('hem.csv', {
-  shuffle: false,
+  shuffle: true,
   splitTest: 10,
   dataColumns: ['lat', 'lng', 'size', 'rooms'],
   labelColumns: ['price'],

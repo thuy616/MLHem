@@ -46,18 +46,10 @@ This command does the following:
 
 Data point [ 59.33859529999999, 17.9293401, 47, 2 ] means the property is located at (lat: 59.33859529999999, lng: 17.9293401), has size 47m2, bedroom 2
 
-Analyzing... [ 59.33859529999999, 17.9293401, 47, 2 ]
-Estimate price: 2504500 2395000
-Accuracy percentage 95.42797494780794
-Analyzing... [ 59.4472572, 17.9612363, 114, 4 ]
-Estimate price: 3603000 3600000
-Accuracy percentage 99.91666666666667
-Analyzing... [ 59.2673746, 18.0116629, 90, 4 ]
-Estimate price: 2928500 2500000
-Accuracy percentage 82.86
-Analyzing... [ 59.29993469999999, 18.0025563, 54.5, 2 ]
-Estimate price: 3085000 3400000
-Accuracy percentage 90.73529411764706
+`Analyzing... [ 59.33859529999999, 17.9293401, 47, 2 ] Estimate price: 2504500 2395000 Accuracy percentage 95.42797494780794`
+`Analyzing... [ 59.4472572, 17.9612363, 114, 4 ] Estimate price: 3603000 3600000 Accuracy percentage 99.91666666666667`
+`Analyzing... [ 59.2673746, 18.0116629, 90, 4 ] Estimate price: 2928500 2500000 Accuracy percentage 82.86`
+`Analyzing... [ 59.29993469999999, 18.0025563, 54.5, 2 ] Estimate price: 3085000 3400000 Accuracy percentage 90.73529411764706`
 
 ## Estimate of new data point
 
@@ -72,3 +64,11 @@ Example:
 ```
 GOOGLE_GEOCODING_API_KEY=[api_key] FULL_ADDRESS="Rämensvägen 29B, Årstastråket, Stockholm" SIZE=80 ROOMS=3 node estimate.js
 ```
+
+returns estimate 4865000
+
+```
+GOOGLE_GEOCODING_API_KEY=[api_key] FULL_ADDRESS="Västgötagränd 5, 2 tr, Maria, Stockholm" SIZE=31.5 ROOMS=1.5 node estimate.js
+```
+
+returns estimate 2711000

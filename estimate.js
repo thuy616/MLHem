@@ -9,18 +9,28 @@ const fullAddress = process.env.FULL_ADDRESS
 const size = process.env.SIZE
 const rooms = process.env.ROOMS
 
-const { lat, lng } = executeGoogleGeocodingRequest(fullAddress)
-const testPoint = [lat, lng, size, rooms]
+const runEstimate = async () => {
+  const location = await executeGoogleGeocodingRequest(fullAddress)
+  if (!location) {
+    console.log('cannot find geocode for the address')
+    process.exit(0)
+  }
+  const { lat, lng } = location
+  const testPoint = [lat, lng, size, rooms]
 
-let { features, labels, testFeatures, testLabels } = loadCSV('hem.csv', {
-  shuffle: true,
-  splitTest: 10,
-  dataColumns: ['lat', 'lng', 'size', 'rooms'],
-  labelColumns: ['price'],
-})
+  console.log({ testPoint })
 
-features = tf.tensor(features)
-labels = tf.tensor(labels)
+  let { features, labels, testFeatures, testLabels } = loadCSV('hem.csv', {
+    shuffle: true,
+    dataColumns: ['lat', 'lng', 'size', 'rooms'],
+    labelColumns: ['price'],
+  })
 
-const estimatePrice = knn(features, labels, tf.tensor(testPoint), 10)
-console.log('estimatePrice: ', estimatePrice)
+  features = tf.tensor(features)
+  labels = tf.tensor(labels)
+
+  const estimatePrice = knn(features, labels, tf.tensor(testPoint), 10)
+  console.log('estimatePrice: ', estimatePrice)
+}
+
+runEstimate()
