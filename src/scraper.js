@@ -25,6 +25,7 @@ const { MONTHS } = require('./constants')
 
 const MAX_PAGE = 200
 
+// TODO: refactor to a separate hemnet scraper function using request-promise
 const executeRequest = page => {
   request({ url: `${HEMNET_URL}${page}` }, async (error, response, body) => {
     if (error) {
@@ -41,8 +42,6 @@ const executeRequest = page => {
     const fees = $('.sold-property-listing__fee')
     const prices = $('.sold-property-listing__price')
     const soldDates = $('.sold-property-listing__sold-date')
-
-    const records = []
 
     for (let i = 0; i < addressesLine1.length; i++) {
       const addressLine1 = addressesLine1[i].children[0].data
@@ -85,7 +84,10 @@ const executeRequest = page => {
           .replace(/\s+/g, '')
       )
 
-      const soldDateElems = soldDates[0].children[0].data.trim().split(' ')
+      const soldDateElems = soldDates[0].children[0].data
+        .trim()
+        .split(' ')
+        .filter(element => element)
       const soldDate = new Date(
         soldDateElems[3],
         MONTHS[soldDateElems[2]],
@@ -93,19 +95,20 @@ const executeRequest = page => {
       ).toISOString()
 
       const location = await executeGoogleGeocodingRequest(`${addressLine1}, ${addressLine2}`)
-      records.push({
-        addressLine1,
-        addressLine2,
-        size,
-        rooms,
-        fee,
-        price,
-        soldDate,
-        ...location,
-      })
+      if (location) {
+        const record = {
+          addressLine1,
+          addressLine2,
+          size,
+          rooms,
+          fee,
+          price,
+          soldDate,
+          ...location,
+        }
+        await csvWriter.writeRecords([record])
+      }
     }
-
-    await csvWriter.writeRecords(records)
   })
 }
 
@@ -116,7 +119,7 @@ const delay = () => {
 const execute = async () => {
   for (let page = 1; page < MAX_PAGE; page++) {
     console.log(`******** PROCESSING PAGE = ${page} ********`)
-    await executeRequest(1)
+    await executeRequest(page)
     // add delay so that hemnet will not block request
     if (page !== MAX_PAGE - 1) await delay()
   }

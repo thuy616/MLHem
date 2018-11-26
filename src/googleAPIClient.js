@@ -9,11 +9,11 @@ const executeGoogleGeocodingRequest = fullAddress => {
         console.error('GOOGLE_GEOCODING_API_ERROR', response.error_message)
       }
 
-      return response.results[0] ? response.results[0].geometry.location : { lat: null, lng: null }
+      return response.results[0] ? response.results[0].geometry.location : undefined
     })
     .catch(error => {
       console.error('GOOGLE_GEOCODING_API_ERROR', error)
-      return { lat: null, lng: null }
+      return undefined
     })
 }
 
