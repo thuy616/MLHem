@@ -1,0 +1,22 @@
+{
+  "name": "mlhem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^0.1.21",
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "csv-writer": "^1.2.0",
+    "lodash": "^4.17.11",
+    "node": "^11.1.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "shuffle-seed": "^1.1.6"
+  }
+}
