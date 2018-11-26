@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tensorflow/tfjs-node": "^0.1.21",
+    "@tensorflow/tfjs": "^0.13.0",
+    "@tensorflow/tfjs-node": "^0.1.17",
+    "@tensorflow/tfjs-node-gpu": "^0.1.21",
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
     "csv-writer": "^1.2.0",
