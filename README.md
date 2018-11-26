@@ -1,4 +1,12 @@
-## Collect data:
+## Install
+
+Run
+
+```
+npm install
+```
+
+## Collect data
 
 Run
 
@@ -13,13 +21,15 @@ GOOGLE_GEOCODING_API_KEY=[api_key] node src/scraper.js
 
 ## Running Analysis
 
-### Load data
-
 Run
 
 ```
 node index.js
 ```
+
+This command does the following:
+
+### Load data
 
 * Load CSV data
 * shuffle seed data
