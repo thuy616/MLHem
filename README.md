@@ -72,3 +72,9 @@ GOOGLE_GEOCODING_API_KEY=[api_key] FULL_ADDRESS="Västgötagränd 5, 2 tr, Maria
 ```
 
 returns estimate 2711000
+
+## What's next? Improving Accuracy
+
+* Scrape the property detailed page on hemnet for more relevant data that influences the price, e.g. the year the building is build, the floor number, etc.
+* More data points, around ~50k records
+* Generate trend line and predict increase or drop in the near future
